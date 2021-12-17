@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -7,7 +8,12 @@ body {
 	background-color: #1c1c1c;
 }
 
-form {
+section#nav-container {
+	height: 45px;
+	display: flex;
+	justify-content: space-evenly;
+}
+#form {
 	padding-top: 10px;
 	padding-bottom: 20px;
 }
@@ -17,7 +23,7 @@ label {
 }
 input#channel-url {
 	width: 400px;
-	max-width: 50vw;
+	max-width: 30vw;
 	border: none;
 	outline: none;
 	border-radius: 3px;
@@ -34,17 +40,60 @@ input#start {
 	cursor: pointer;
 }
 
+#controls-container {
+	display: none;
+}
+#timer {
+	color: white;
+}
+button#toggletimer {
+	color: white;
+}
+button#skip {
+	color: white;
+}
 section#video-container {
 	width: 100%;
-	max-height: 720px;
-	height: 56.25vw; /* 16x9 aspect ratio */
+	height: calc(100vh - 65px);
 	background-color: black;
 	background-image: url('img/videobg.png');
 	background-position: center;
 	background-repeat: no-repeat;
 }
+
+div#instructions {
+	color: white;
+	width: 450px;
+	max-width: 100vw;
+	margin: auto;
+}
+div#instructions > h2 {
+	margin-left: 24px;
+}
+
 iframe {
 	margin: auto;
 	height: 100%;
 	width: 100%;
+}
+
+footer {
+	color: #aaa;
+	margin: auto;
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-content: center;
+	font-size: smaller;
+}
+div#credits {
+	width: auto;
+}
+
+div#credits > a,
+div#credits a:visited {
+	color: inherit;
+}
+div#credits > a:hover {
+	color: red;
 }
