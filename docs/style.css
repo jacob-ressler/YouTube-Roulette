@@ -12,10 +12,10 @@ section#nav-container {
 	height: 45px;
 	display: flex;
 	justify-content: space-evenly;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 #form {
-	padding-top: 10px;
-	padding-bottom: 20px;
 }
 label {
 	color: white;
@@ -41,17 +41,26 @@ input#start {
 }
 
 #controls-container {
-	display: none;
 }
-#timer {
+#controls {
+	display: flex;
+	gap: 5px;
+}
+#timer,
+#loading {
 	color: white;
 }
-button#toggletimer {
+button {
+	border: none;
+	padding: 3px 10px;
+	text-align: center;
+	background-color: red;
 	color: white;
+	font-weight: 700;
+	border-radius: 3px;
+	cursor: pointer;
 }
-button#skip {
-	color: white;
-}
+
 section#video-container {
 	width: 100%;
 	height: calc(100vh - 65px);
@@ -71,7 +80,7 @@ div#instructions > h2 {
 	margin-left: 24px;
 }
 
-iframe {
+iframe#video {
 	margin: auto;
 	height: 100%;
 	width: 100%;
