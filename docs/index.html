@@ -15,10 +15,14 @@
 				<input type="url" name="c" id="channel-url" />
 				<input type="button" onclick="start()" value="START" id="start" />
 			</div>
-			<div id="controls-container">
-				<div id="timer"></div>
-				<button id="toggletimer">DISABLE TIMER</button>
-				<button id="skip">SKIP</button>
+			<div id="loading" hidden="true">Loading videos...</div>
+			<button id="spin" onclick="spin()" hidden="true">SPIN</button>
+			<div id="controls-container" hidden="true">
+				<div id="controls">
+					<div id="timer">120</div>
+					<button id="toggletimer" onclick="toggleTimer()">DISABLE TIMER</button>
+					<button id="skip" onclick="nextVideo()">SKIP</button>
+				</div>
 			</div>
 		</section>
 		<section id="video-container">
@@ -26,17 +30,20 @@
 				<h2>INSTRUCTIONS</h2>
 				<ol>
 					<li>Paste a YouTube channel URL into the text field above</li>
-					<li>Click <b>START</b></li>
+					<li>Click <b>START</b> and wait for the video data to load</li>
+					<li>Click <b>SPIN</b></li>
 					<li>Enjoy :)</li>
 				</ol>
 			</div>
-			<!-- <iframe
-				src="https://www.youtube.com/embed/qMDH5h6WKY8?autoplay=1"
+			<iframe
+				hidden="true"
+				id="video"
+				src=""
 				title="YouTube video player"
 				frameborder="0"
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 				allowfullscreen
-			></iframe> -->
+			></iframe>
 		</section>
 		<footer>
 			<div id="credits">
