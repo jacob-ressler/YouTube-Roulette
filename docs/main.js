@@ -16,18 +16,22 @@ async function start() {
 	// unhide loading text
 	document.getElementById('loading').hidden = false;
 
-	playlistId = await getPlaylistId('https://www.youtube.com/channel/UCMe7f7wqQE-ycqT2qH6zlpA');
-	//document.getElementById('channel-url').value;
-	//console.log(playlistId);
+	// get playlistID from channel URL
+	playlistId = await getPlaylistId(document.getElementById('channel-url').value);
+
+	if (playlistId == null) {
+		// invalid URL was entered, revert page
+		document.getElementById('form').hidden = false;
+		document.getElementById('loading').hidden = true;
+		return;
+	}
 
 	// get playlist data
 	let url = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&key=${KEY}`;
 	playlistData = await getPlaylistData(url);
-	//console.log(playlistData);
 
 	// use the playlist data to get duration data for each video
 	durationData = await getDurationData(playlistData);
-	//console.log(durationData);
 
 	// hide loading text
 	document.getElementById('loading').hidden = true;
@@ -44,6 +48,7 @@ async function getPlaylistId(curl) {
 	if (cid.substring(0, 2) !== 'UC') {
 		// this is not a valid channel url
 		alert('Please enter a valid YouTube channel URL. Vanity and custom URLs will not work.');
+		return null;
 	}
 
 	// convert channel id to playlist id
@@ -182,11 +187,11 @@ function updateTimer() {
 function toggleTimer() {
 	if (timerEnabled) {
 		// disable timer and change text to 'ENABLE TIMER'
-		document.getElementById('toggletimer').innerText = 'ENABLE TIMER';
+		document.getElementById('toggletimer').innerText = 'RESUME TIMER';
 		timerEnabled = false;
 	} else {
 		// enable timer and change text to 'DISABLE TIMER'
-		document.getElementById('toggletimer').innerText = 'DISABLE TIMER';
+		document.getElementById('toggletimer').innerText = 'PAUSE TIMER';
 		timerEnabled = true;
 	}
 }
