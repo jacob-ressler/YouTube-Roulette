@@ -71,9 +71,10 @@ section#video-container {
 	width: 100%;
 	height: calc(100vh - 65px);
 	background-color: black;
-	background-image: url('img/videobg.png');
+	background-image: url('img/YouTube Roulette logo faded.png');
 	background-position: center;
 	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 div#instructions {
