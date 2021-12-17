@@ -4,6 +4,7 @@ const MAX_TIMER_VALUE = 120;
 
 let playlistId; // playlist ID
 let playlistData = []; // video IDs
+let durationData = []; // video durations
 let timerEnabled = true;
 let timerValue;
 
@@ -31,11 +32,12 @@ async function start() {
 	url = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&key=${KEY}`;
 	pageToken = '';
 	// call yt api using url
-	await getData(url, pageToken);
-	console.log(playlistData);
+	await getPlaylistData(url, pageToken);
+	console.log(playlistData[6]);
+	toSeconds(playlistData[6]);
 }
 
-function getData(url, pageToken) {
+function getPlaylistData(url, pageToken) {
 	fetch(url + pageToken)
 		.then((response) => response.json())
 		.then((data) => {
@@ -44,7 +46,27 @@ function getData(url, pageToken) {
 				playlistData.push(item.snippet.resourceId.videoId);
 			});
 			pageToken = data.nextPageToken ? data.nextPageToken : '';
-			if (data.nextPageToken) getData(url, '&pageToken=' + data.nextPageToken);
+			if (data.nextPageToken) getPlaylistData(url, '&pageToken=' + data.nextPageToken);
+		});
+}
+
+function getDurationData() {
+	playlistData.forEach((video) => {
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+			});
+	});
+}
+
+function toSeconds(videoId) {
+	url = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${KEY}`;
+
+	fetch(url)
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
 		});
 }
 
