@@ -9,11 +9,15 @@
 		<script src="main.js"></script>
 	</head>
 	<body>
-		<form action=".">
-			<label for="c">Channel URL: </label>
-			<input type="url" name="c" id="channel-url" />
-			<input type="button" onclick="submit()" value="START" id="start" />
-		</form>
+		<section id="nav-container">
+			<form action=".">
+				<label for="c">Channel URL: </label>
+				<input type="url" name="c" id="channel-url" />
+				<input type="button" onclick="submit()" value="START" id="start" />
+			</form>
+			<div id="timer"></div>
+			<button id="disabletimer"></button>
+		</section>
 		<section id="video-container">
 			<!-- <iframe
 				src="https://www.youtube.com/embed/qMDH5h6WKY8?autoplay=1"
@@ -23,5 +27,11 @@
 				allowfullscreen
 			></iframe> -->
 		</section>
+		<footer>
+			<div id="credits">
+				Developed by <a href="https://github.com/jacob-ressler">Jacob Ressler</a>. Inspired by
+				<a href="https://jerma.org/random">Random Jerma Moments</a>.
+			</div>
+		</footer>
 	</body>
 </html>
