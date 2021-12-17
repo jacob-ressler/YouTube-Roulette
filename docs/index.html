@@ -10,15 +10,26 @@
 	</head>
 	<body>
 		<section id="nav-container">
-			<form action=".">
+			<div id="form">
 				<label for="c">Channel URL: </label>
 				<input type="url" name="c" id="channel-url" />
-				<input type="button" onclick="submit()" value="START" id="start" />
-			</form>
-			<div id="timer"></div>
-			<button id="disabletimer"></button>
+				<input type="button" onclick="start()" value="START" id="start" />
+			</div>
+			<div id="controls-container">
+				<div id="timer"></div>
+				<button id="toggletimer">DISABLE TIMER</button>
+				<button id="skip">SKIP</button>
+			</div>
 		</section>
 		<section id="video-container">
+			<div id="instructions">
+				<h2>INSTRUCTIONS</h2>
+				<ol>
+					<li>Paste a YouTube channel URL into the text field above</li>
+					<li>Click <b>START</b></li>
+					<li>Enjoy :)</li>
+				</ol>
+			</div>
 			<!-- <iframe
 				src="https://www.youtube.com/embed/qMDH5h6WKY8?autoplay=1"
 				title="YouTube video player"
