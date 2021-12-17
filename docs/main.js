@@ -1,5 +1,4 @@
 const KEY = 'AIzaSyCLUo5qEty6lVBgMzV4JQFQmx7ivTQcuD8';
-const TIMER = document.getElementById('timer');
 const MAX_TIMER_VALUE = 120;
 
 let playlistId; // playlist ID
@@ -7,9 +6,16 @@ let playlistData = []; // video IDs
 let durationData = []; // video durations
 let timerEnabled = true;
 let timerValue;
+let timerInterval;
 
 // Main function. Gets all data for video randomization, starts the roulette
 async function start() {
+	// hide form
+	document.getElementById('form').hidden = true;
+
+	// unhide loading text
+	document.getElementById('loading').hidden = false;
+
 	playlistId = await getPlaylistId('https://www.youtube.com/channel/UCMe7f7wqQE-ycqT2qH6zlpA');
 	//document.getElementById('channel-url').value;
 	//console.log(playlistId);
@@ -22,6 +28,12 @@ async function start() {
 	// use the playlist data to get duration data for each video
 	durationData = await getDurationData(playlistData);
 	//console.log(durationData);
+
+	// hide loading text
+	document.getElementById('loading').hidden = true;
+
+	// unhide spin button
+	document.getElementById('spin').hidden = false;
 }
 
 async function getPlaylistId(curl) {
@@ -121,14 +133,61 @@ function toSeconds(isotime) {
 	return seconds;
 }
 
+function spin() {
+	// hide spin button and instructions
+	document.getElementById('spin').hidden = true;
+	document.getElementById('instructions').hidden = true;
+
+	// unhide iframe and controls
+	document.getElementById('video').hidden = false;
+	document.getElementById('controls-container').hidden = false;
+
+	// load video
+	nextVideo();
+}
+
+function nextVideo() {
+	// pick a random video from the playlist
+	let i = Math.floor(Math.random() * playlistData.length - 1);
+	console.log(`${playlistData[i]}, ${durationData[i]}`);
+
+	// pick a random timestamp
+	let ts = Math.floor(Math.random() * (durationData[i] - MAX_TIMER_VALUE));
+	// load the video
+	url = `https://www.youtube.com/embed/${playlistData[i]}?start=${ts}&autoplay=1`;
+	document.getElementById('video').setAttribute('src', url);
+
+	startTimer();
+}
+
+function startTimer() {
+	clearInterval(timerInterval);
+	timerValue = MAX_TIMER_VALUE;
+	document.getElementById('timer').innerText = timerValue;
+	timerInterval = setInterval(updateTimer, 1000);
+}
+
 function updateTimer() {
 	if (timerEnabled) {
 		timerValue--;
+		console.log(timerValue);
 		if (timerValue <= 0) {
 			// we have reached the end of the time for this video, get the next one
+			nextVideo();
+		} else {
+			document.getElementById('timer').innerText = timerValue;
 		}
-		TIMER.innerText = timerValue;
 	}
 }
 
-// https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=UUbUh4Lf8YsYxopSl69EWwTA&key=[YOUR_API_KEY] HTTP/1.1
+function toggleTimer() {
+	if (timerEnabled) {
+		// disable timer and change text to 'ENABLE TIMER'
+		document.getElementById('toggletimer').innerText = 'ENABLE TIMER';
+		timerEnabled = false;
+	} else {
+		// enable timer and change text to 'DISABLE TIMER'
+		document.getElementById('toggletimer').innerText = 'DISABLE TIMER';
+		timerEnabled = true;
+	}
+}
