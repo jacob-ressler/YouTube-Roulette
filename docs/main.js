@@ -170,7 +170,6 @@ function startTimer() {
 function updateTimer() {
 	if (timerEnabled) {
 		timerValue--;
-		console.log(timerValue);
 		if (timerValue <= 0) {
 			// we have reached the end of the time for this video, get the next one
 			nextVideo();
