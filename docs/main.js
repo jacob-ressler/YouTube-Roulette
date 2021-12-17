@@ -169,6 +169,10 @@ function startTimer() {
 	clearInterval(timerInterval);
 	timerValue = MAX_TIMER_VALUE;
 	document.getElementById('timer').innerText = timerValue;
+
+	if (timerEnabled == false) {
+		toggleTimer();
+	}
 	timerInterval = setInterval(updateTimer, 1000);
 }
 
