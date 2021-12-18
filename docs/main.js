@@ -8,6 +8,9 @@ let timerEnabled = true;
 let timerValue;
 let timerInterval;
 
+let totalElementCount;
+let currElementCount;
+
 // Main function. Gets all data for video randomization, starts the roulette
 async function start() {
 	// hide form
@@ -61,11 +64,21 @@ async function getPlaylistData(url) {
 	response = await fetch(url);
 	data = await response.json();
 
+	// get total number of items*2 (videoIDs + durations) for progress tracking
+	totalElementCount = data.pageInfo.totalResults * 2;
+
+	// set current element count to 0
+	currElementCount = 0;
+
 	// push each page's items to array
 	while (data.nextPageToken) {
 		data.items.forEach((item) => {
 			arr.push(item.snippet.resourceId.videoId);
+
+			// update progress %
+			updateProgress();
 		});
+
 		response = await fetch(url + '&pageToken=' + data.nextPageToken);
 		data = await response.json();
 	}
@@ -73,6 +86,9 @@ async function getPlaylistData(url) {
 	// push final page's items to array
 	data.items.forEach((item) => {
 		arr.push(item.snippet.resourceId.videoId);
+
+		// update progress %
+		updateProgress();
 	});
 
 	return arr;
@@ -94,12 +110,21 @@ async function getDurationData(pdata, start = 0, end = 50) {
 		data.items.forEach((item) => {
 			let seconds = toSeconds(item.contentDetails.duration);
 			arr.push(seconds);
+
+			// update progress %
+			updateProgress();
 		});
 
 		start += 50;
 	} while (start < pdata.length);
 
 	return arr;
+}
+
+function updateProgress() {
+	currElementCount++;
+	let percent = (currElementCount / totalElementCount) * 100;
+	document.getElementById('progress').innerText = `${percent.toFixed(2)}%`;
 }
 
 function toSeconds(isotime) {

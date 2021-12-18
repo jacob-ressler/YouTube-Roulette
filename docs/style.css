@@ -47,6 +47,19 @@ input#start {
 #loading {
 	color: white;
 }
+#loading {
+	width: 400px;
+}
+#loading-container {
+	display: flex;
+	justify-content: center;
+}
+#progress {
+	color: lightgrey;
+	width: 60px;
+	text-align: right;
+}
+
 #timer {
 	font-weight: 700;
 	width: 50px;

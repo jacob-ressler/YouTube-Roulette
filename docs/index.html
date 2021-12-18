@@ -15,7 +15,12 @@
 				<input type="url" name="c" id="channel-url" />
 				<input type="button" onclick="start()" value="START" id="start" />
 			</div>
-			<div id="loading" hidden="true">Loading videos...</div>
+			<div id="loading" hidden="true">
+				<div id="loading-container">
+					<span style="width: 120px">Loading videos...</span> <span id="progress">0.00%</span>
+				</div>
+			</div>
+
 			<button id="spin" onclick="spin()" hidden="true">SPIN</button>
 			<div id="controls-container" hidden="true">
 				<div id="controls">
