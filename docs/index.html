@@ -15,18 +15,27 @@
 				<input type="url" name="c" id="channel-url" />
 				<input type="button" onclick="start()" value="START" id="start" />
 			</div>
-			<div id="loading" hidden="true">
-				<div id="loading-container">
+			<div id="loading-container" hidden>
+				<div id="loading">
 					<span style="width: 120px">Loading videos...</span> <span id="progress">0.00%</span>
 				</div>
 			</div>
 
-			<button id="spin" onclick="spin()" hidden="true">SPIN</button>
-			<div id="controls-container" hidden="true">
+			<button id="spin" onclick="spin()" hidden>SPIN</button>
+
+			<div id="controls-container" hidden>
 				<div id="controls">
 					<div id="timer">120</div>
 					<button id="toggletimer" onclick="toggleTimer()">PAUSE TIMER</button>
 					<button id="skip" onclick="nextVideo()">SKIP</button>
+					<div id="maxtime-modifier">
+						<span id="maxtime-label">Timer will start at: </span>
+						<div id="maxtime-control">
+							<button class="max" id="dectime" onclick="changeMaxTime(-10)">-10</button>
+							<div id="maxtime-value">60</div>
+							<button class="max" id="inctime" onclick="changeMaxTime(10)">+10</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -43,14 +52,14 @@
 				<h2>WHAT IS THIS?</h2>
 				<p style="margin-left: 24px">
 					This is YouTube Roulette (or at least that's what I'm calling it). With just a YouTube
-					channel URL, you are able to view an endless stream of random 2-minute snippets from
+					channel URL, you are able to view an endless stream of random 1-minute snippets from
 					random videos belonging to that channel. Find a snippet you like? Pause the timer and
 					enjoy as much of the video as you want! Find a snippet you want nothing to do with? Go
 					ahead and skip it with the handy little <b>SKIP</b> button!
 				</p>
 			</div>
 			<iframe
-				hidden="true"
+				hidden
 				id="video"
 				src=""
 				title="YouTube video player"

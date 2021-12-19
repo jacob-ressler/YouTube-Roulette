@@ -44,13 +44,13 @@ input#start {
 	gap: 5px;
 }
 #timer,
-#loading {
+#loading-container {
 	color: white;
 }
-#loading {
+#loading-container {
 	width: 400px;
 }
-#loading-container {
+#loading {
 	display: flex;
 	justify-content: center;
 }
@@ -62,7 +62,34 @@ input#start {
 
 #timer {
 	font-weight: 700;
+	font-size: 18px;
+	width: 80px;
+	text-align: center;
+}
+
+#maxtime-label {
+	color: white;
+	padding-right: 16px;
+}
+#maxtime-modifier {
+	padding-left: 50px;
+	width: 400px;
+	max-height: 45px;
+	display: flex;
+}
+
+#maxtime-control {
+	display: flex;
+	flex-direction: row;
+}
+
+#maxtime-value {
 	width: 50px;
+	color: white;
+	padding: 3px 10px;
+	text-decoration: underline;
+	font-weight: 600;
+	text-align: center;
 }
 
 button {
@@ -78,6 +105,18 @@ button {
 
 button#toggletimer {
 	width: 120px;
+}
+
+button.max {
+	background-color: lightgrey;
+	color: black;
+	font-weight: 500;
+	padding: 2px 5px;
+	width: 40px;
+}
+
+button.max:hover {
+	text-decoration: underline;
 }
 
 section#video-container {

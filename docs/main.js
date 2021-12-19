@@ -1,5 +1,8 @@
 const KEY = 'AIzaSyCLUo5qEty6lVBgMzV4JQFQmx7ivTQcuD8';
-const MAX_TIMER_VALUE = 120;
+const MAX_MAX_TIMER_VALUE = 600;
+const MIN_MAX_TIMER_VALUE = 10;
+
+let MAX_TIMER_VALUE = 60;
 
 let playlistId; // playlist ID
 let playlistData = []; // video IDs
@@ -17,7 +20,7 @@ async function start() {
 	document.getElementById('form').hidden = true;
 
 	// unhide loading text
-	document.getElementById('loading').hidden = false;
+	document.getElementById('loading-container').hidden = false;
 
 	// get playlistID from channel URL
 	playlistId = await getPlaylistId(document.getElementById('channel-url').value);
@@ -25,7 +28,7 @@ async function start() {
 	if (playlistId == null) {
 		// invalid URL was entered, revert page
 		document.getElementById('form').hidden = false;
-		document.getElementById('loading').hidden = true;
+		document.getElementById('loading-container').hidden = true;
 		return;
 	}
 
@@ -37,7 +40,7 @@ async function start() {
 	durationData = await getDurationData(playlistData);
 
 	// hide loading text
-	document.getElementById('loading').hidden = true;
+	document.getElementById('loading-container').hidden = true;
 
 	// unhide spin button
 	document.getElementById('spin').hidden = false;
@@ -191,6 +194,7 @@ function nextVideo() {
 }
 
 function startTimer() {
+	changeMaxTime(0);
 	clearInterval(timerInterval);
 	timerValue = MAX_TIMER_VALUE;
 	document.getElementById('timer').innerText = timerValue;
@@ -223,4 +227,15 @@ function toggleTimer() {
 		document.getElementById('toggletimer').innerText = 'PAUSE TIMER';
 		timerEnabled = true;
 	}
+}
+
+function changeMaxTime(num) {
+	// update max timer value (respecting min of 10 and max of 600)
+	MAX_TIMER_VALUE = Math.max(
+		Math.min(MAX_TIMER_VALUE + num, MAX_MAX_TIMER_VALUE),
+		MIN_MAX_TIMER_VALUE
+	);
+
+	// update DOM
+	document.getElementById('maxtime-value').innerText = MAX_TIMER_VALUE;
 }
