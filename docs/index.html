@@ -25,10 +25,12 @@
 
 			<div id="controls-container" hidden>
 				<div id="controls">
-					<div id="timer">120</div>
-					<button id="toggletimer" onclick="toggleTimer()">PAUSE TIMER</button>
-					<button id="skip" onclick="nextVideo()">SKIP</button>
-					<div id="maxtime-modifier">
+					<div id="timer-container">
+						<div id="timer">120</div>
+						<button id="toggletimer" onclick="toggleTimer()">PAUSE TIMER</button>
+						<button id="skip" onclick="nextVideo()">SKIP</button>
+					</div>
+					<div id="maxtime-container">
 						<span id="maxtime-label">Timer will start at: </span>
 						<div id="maxtime-control">
 							<button class="max" id="dectime" onclick="changeMaxTime(-10)">-10</button>

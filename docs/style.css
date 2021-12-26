@@ -8,10 +8,11 @@ body {
 	background-color: #1c1c1c;
 }
 
-section#nav-container {
+#nav-container {
 	height: 45px;
 	display: flex;
 	justify-content: space-evenly;
+	align-items: center;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
@@ -20,7 +21,7 @@ label {
 	color: white;
 	font-weight: 600;
 }
-input#channel-url {
+#channel-url {
 	width: 400px;
 	max-width: 30vw;
 	border: none;
@@ -28,7 +29,7 @@ input#channel-url {
 	border-radius: 3px;
 	padding: 3px 5px;
 }
-input#start {
+#start {
 	border: none;
 	padding: 3px 10px;
 	text-align: center;
@@ -60,10 +61,15 @@ input#start {
 	text-align: right;
 }
 
+#timer-container {
+	display: flex;
+	gap: 5px;
+}
+
 #timer {
 	font-weight: 700;
 	font-size: 18px;
-	width: 80px;
+	width: 60px;
 	text-align: center;
 }
 
@@ -71,11 +77,11 @@ input#start {
 	color: white;
 	padding-right: 16px;
 }
-#maxtime-modifier {
-	padding-left: 50px;
-	width: 400px;
+#maxtime-container {
+	width: auto;
 	max-height: 45px;
 	display: flex;
+	justify-content: center;
 }
 
 #maxtime-control {
@@ -103,11 +109,11 @@ button {
 	cursor: pointer;
 }
 
-button#toggletimer {
+#toggletimer {
 	width: 120px;
 }
 
-button.max {
+.max {
 	background-color: lightgrey;
 	color: black;
 	font-weight: 500;
@@ -115,11 +121,11 @@ button.max {
 	width: 40px;
 }
 
-button.max:hover {
+.max:hover {
 	text-decoration: underline;
 }
 
-section#video-container {
+#video-container {
 	width: 100%;
 	height: calc(100vh - 65px);
 	background-color: black;
@@ -129,17 +135,18 @@ section#video-container {
 	background-size: contain;
 }
 
-div#instructions {
+#instructions {
 	color: white;
 	width: 450px;
 	max-width: 100vw;
 	margin: auto;
+	padding-top: 20px;
 }
-div#instructions > h2 {
+#instructions > h2 {
 	margin-left: 24px;
 }
 
-iframe#video {
+#video {
 	margin: auto;
 	height: 100%;
 	width: 100%;
@@ -154,14 +161,31 @@ footer {
 	align-content: center;
 	font-size: smaller;
 }
-div#credits {
+#credits {
 	width: auto;
 }
 
-div#credits > a,
-div#credits a:visited {
+#credits > a,
+#credits a:visited {
 	color: inherit;
 }
-div#credits > a:hover {
+#credits > a:hover {
 	color: red;
+}
+
+/* Orient nav section as columns for small width */
+@media screen and (max-width: 670px) {
+	#nav-container {
+		height: 90px;
+	}
+	#video-container {
+		height: calc(100vh - 110px);
+	}
+
+	#controls {
+		flex-flow: column;
+		flex-direction: column-reverse;
+		align-items: center;
+		gap: 15px;
+	}
 }
