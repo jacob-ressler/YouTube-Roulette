@@ -138,12 +138,14 @@ button {
 #instructions {
 	color: white;
 	width: 450px;
-	max-width: 100vw;
+	max-width: 95vw;
 	margin: auto;
+	padding: 16px;
 	padding-top: 20px;
 }
-#instructions > h2 {
-	margin-left: 24px;
+
+#instructions ol {
+	padding-left: 1em;
 }
 
 #video {
