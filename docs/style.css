@@ -42,7 +42,7 @@ label {
 
 #controls {
 	display: flex;
-	gap: 5px;
+	gap: 80px;
 }
 #timer,
 #loading-container {
