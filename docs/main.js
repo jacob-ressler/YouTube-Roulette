@@ -185,7 +185,11 @@ function nextVideo() {
 	console.log(`${playlistData[i]}, ${durationData[i]}`);
 
 	// pick a random timestamp
-	let ts = Math.floor(Math.random() * (durationData[i] - MAX_TIMER_VALUE));
+	let tsMax = durationData[i] - MAX_TIMER_VALUE;
+	let ts =
+		tsMax >= 0 ? Math.floor(Math.random() * tsMax) : Math.floor(Math.random() * durationData[i]);
+	console.log(ts);
+
 	// load the video
 	url = `https://www.youtube.com/embed/${playlistData[i]}?start=${ts}&autoplay=1`;
 	document.getElementById('video').setAttribute('src', url);
